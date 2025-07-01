@@ -1,0 +1,135 @@
+body {
+  font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+  background: #fdfdfd;
+  color: #222;
+}
+
+.container {
+  max-width: 750px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+h1, h2, h3 {
+  color: #004080;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.equation {
+  text-align: center;
+  font-size: 1.rem;
+  margin: 1rem 0;
+}
+
+.svg-image {
+  display: block;
+  margin: 1rem auto;
+  max-width: 100%;
+  height: auto;
+  border: 0px solid #ddd;
+  border-radius: 4px;
+}
+
+.autor {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
+  text-align: right;
+  font-style: italic;
+}
+
+.fecha {
+  font-size: 0.8rem;
+  color: #777;
+  text-align: right;
+  margin-bottom: 2rem;
+}
+
+
+/* Reiniciar contador en el contenedor principal */
+.container {
+  counter-reset: figura;
+}
+
+/* Cada figura incrementa el contador */
+.fig {
+  counter-increment: figura;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.fig img {
+  max-width: 100%;
+  height: auto;
+  border: 0px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Pie de figura */
+.fig figcaption {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #444;
+}
+
+/* Número automático con "Figura N:" */
+.fig-number::before {
+  content: "Figura " counter(figura) ". ";
+  font-weight: bold;
+}
+
+.referencias {
+  margin-top: 3rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.referencias h2 {
+  font-size: 1.5rem;
+  color: #004080;
+  margin-bottom: 1rem;
+}
+
+.referencias ol {
+  padding-left: 1.5rem;
+}
+
+.referencias li {
+  margin-bottom: 0.75rem;
+}
+
+.lista-referencias {
+  list-style: none;
+  padding-left: 0;
+}
+
+.lista-referencias li {
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  text-indent: -1rem;
+  padding-left: 1rem;
+}
+
+sup {
+      font-size: 0.8em;
+    }
+    .footnotes {
+      margin-top: 2em;
+      border-top: 1px solid #ccc;
+      padding-top: 0.em;
+      font-size: 0.9em;
+    }
+    .footnotes li {
+      margin-bottom: 0.5em;
+    }
+
