@@ -132,3 +132,7 @@ sup {
     .footnotes li {
       margin-bottom: 0.5em;
     }
+
+ ol li {
+    margin-bottom: 0.5em;
+  }
