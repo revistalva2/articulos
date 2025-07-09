@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varias soluciones al problema de Cramer-Castillon</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- MathJax (v3, moderno) -->
+  <!--<script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body);"></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Varias soluciones al problema de Cramer-Castillon</h1>
+	<p class="autor">Francisco Javier García Capitán y José Manuel Sánchez Muñoz</p>
+	<p class="fecha">30 de junio de 2025</p>
+	<p>En el fascinante mundo de la geometría, pocos desafíos son tan intrigantes como el problema de Cramer-Castillon. Imagina una circunferencia y tres puntos, independientes unos de otros, dispersos aleatoriamente en el plano. La pregunta que surge es: ¿resulta posible encontrar un triángulo cuyos lados no solo se inscriban en dicha circunferencia, sino que también pasen exactamente (ellos o sus prolongaciones) por estos puntos dados? Este dilema no solo despierta la curiosidad matemática, sino que también nos invita a explorar las profundas interacciones entre formas y espacios.</p>
+	<p>A lo largo de este artículo, desentrañaremos las complejidades del problema y descubriremos las condiciones necesarias para la construcción de este triángulo ideal. A medida que avanzamos, veremos cómo este enigma geométrico se conecta con conceptos más amplios en la teoría de la geometría euclidiana y sus aplicaciones prácticas. Prepárate para sumergirte en un viaje donde la lógica y la creatividad se entrelazan, revelando la belleza oculta detrás de una simple pregunta geométrica.</p>
+    <h2>Un poco de historia</h2>
+    <p>
+     Ya en el siglo IV, <a href="https://es.wikipedia.org/wiki/Papo_de_Alejandr%C3%ADa" target="_blank">Papo de Alejandría</a> abordó el caso específico de este problema en la situación en que los puntos <span style="font-size: 0.9em;">\(A\)</span>, <span style="font-size: 0.9em;">\(B\)</span> y <span style="font-size: 0.9em;">\(C\)</span> estén alineados. El suizo <a href="https://es.wikipedia.org/wiki/Gabriel_Cramer" target="_blank">Gabriel Cramer</a> trabajó varios años en la propuesta generalizada. En 1742, le comentó sus investigaciones al joven matemático italiano (residente en Berlín) <a href="https://en.wikipedia.org/wiki/Giovanni_Salvemini" target="_blank">Giovanni Salvemini</a>, apodado <em>Castiglione</em> (en español <em>Castillon</em>) por ser el nombre del pueblo toscano en el que nació. Tras algo más de treinta años de investigaciones,  en 1776 el italiano encontró una solución geométrica que mereció su publicación en las actas de la Academia de Berlín (véase <a href="#ref-osterner">Ostermann & Wanner, 2012, pp. 175-178</a>).
+    </p>
+	<p>
+	El problema fue también estudiado por geómetras posteriores como el francés <a href="https://es.wikipedia.org/wiki/Joseph-Louis_Lagrange" target="_blank">Joseph L. Lagrange</a> que encontró una solución analítica que mostró a Castillon solo un día después de su presentación en la Academia de Berlín. Dicho trabajo ponía de manifiesto el potencial del método analítico (véase <a href="#ref-wanner">Wanner, 2006</a>). Años más tarde, en 1803, la solución de Lagrange fue simplificada por su coterráneo <a href="https://es.wikipedia.org/wiki/Lazare_Carnot" target="_blank">Lazare Carnot</a> como veremos más adelante. 
+	</p>
+	<p>
+	En los años posteriores, fueron varios los geómetras que dedicaron sus esfuerzos al problema como por ejemplo el italiano <a href="https://es.wikipedia.org/wiki/Gian_Francesco_Malfatti" target="_blank">Gianfrancesco Malfatti</a> o el ítalo francés <a href="https://en.wikipedia.org/wiki/Annibale_Giordano" target="_blank">Annibale Giordano</a>, que dedujo una elegantísima solución con tan solo dieciséis años de edad. Sin embargo, a finales del siglo XVIII no se podía sospechar aún cuán trivial resulta este problema tratado por los métodos de la geometría proyectiva que iniciaría el francés <a href="https://es.wikipedia.org/wiki/Jean-Victor_Poncelet" target="_blank">Jean-Victor Poncelet</a> a comienzos del siglo XIX.
+	</p>
+	<p>En España, el ejercicio fue propuesto en 2003 como problema 82 en la célebre y añorada página <a href="https://trianguloscabri.github.io/curso20022003/index.htm"><em>triánguloscabri</em></a>. Propusieron soluciones al mismo Saturnino Campo y Fran&#231;ois Rideau.</p>
+	<p>En 2004, con motivo de la propuesta del <a href="https://trianguloscabri.github.io/curso20042005/200extraped/gergonne.htm" target="_blank">problema 200</a>, nuestro admirado José María Pedret Yebra presentó en un brillante ensayo la construcción general del problema para una cónica. </p>
+	<p>En 2008, Pedret volvió de nuevo a la carga elaborando una solución por conjugación. Como en su solución anterior, ésta viene precedida por toda una fundamentación teórica (véase <a href="#ref-pedret">Pedret Yebra, 2008</a>).</p>
+	<div style="text-align: center;">
+	<img src="images/pedret.jpg" alt="José María Pedret Yebra" style="width: 250px;">
+	<figcaption>José María Pedret Yebra (Priego de Córdoba, may. 2006).</br> Foto cortesía de F. J. García Capitán.</figcaption>
+	</div>
+	
+<!--<div class="equation"> */
+  /*    $$e^{i\pi} + 1 = 0$$ */
+  /*  </div> */	-->
+    
+
+    <h2>Solución con haces proyectivos</h2>
+    <p>
+	La resolución del problema que vamos a exponer puede encontrarse en <a href="#ref-misc">Díaz Hernando (2015)</a>.
+	</p>
+	<p>
+	Haciendo uso de las series y haces proyectivos, vamos a considerar tres puntos arbitrarios <span style="font-size: 0.9em;">\(D\)</span>, <span style="font-size: 0.9em;">\(E\)</span> y <span style="font-size: 0.9em;">\(F\)</span> sobre la circunferencia  <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>, de manera que vamos a obtener sus transformados sobre la misma, haciendo pasar rayos desde dichos puntos que pasen a su vez por los puntos <span style="font-size: 0.9em;">\(A\)</span>, <span style="font-size: 0.9em;">\(B\)</span> y <span style="font-size: 0.9em;">\(C\)</span> dados. Se obtienen finalmente los puntos transformados <span style="font-size: 0.9em;">\(D'\)</span>, <span style="font-size: 0.9em;">\(E'\)</span> y <span style="font-size: 0.9em;">\(F'\)</span> (véase la <a href="#haces">figura 1</a>).
+	</p>
+	<figure class="fig" id="haces">
+	<img src="images/figura1.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> <!--Diagrama del sistema (opcional).-->
+	</figcaption>
+	</figure>
+	<p>
+	Vamos a obtener el eje de la proyectividad definida en la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>. Se obtienen tres puntos de dicho eje <span style="font-size: 0.9em;">\(p\)</span> haciendo <span style="font-size: 0.9em;">\(DE'\cap D'E\)</span>, <span style="font-size: 0.9em;">\(DF'\cap D'F\)</span> y <span style="font-size: 0.9em;">\(EF'\cap F'E\)</span> (véase la <a href="#2">figura 2</a>). Los puntos <span style="font-size: 0.9em;">\(N\)</span> y <span style="font-size: 0.9em;">\(P\)</span>, intersección del eje de proyectividad <span style="font-size: 0.9em;">\(p\)</span> con la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>, son puntos dobles de la proyectividad definida, por lo tanto, son vértices de los triángulos inscritos a dicha circunferencia que se buscan.
+	</p>
+	<figure class="fig" id="2">
+	<img src="images/figura2.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> <!--Diagrama del sistema (opcional).-->
+	</figcaption>
+	</figure>
+	<p>
+	Finalmente, basta trazar desde <span style="font-size: 0.9em;">\(N\)</span> un rayo que pase por el punto <span style="font-size: 0.9em;">\(A\)</span>, de manera que de su intersección con la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> resulta el segundo vértice <span style="font-size: 0.9em;">\(Q\)</span> del triángulo buscado. Trazando un rayo desde <span style="font-size: 0.9em;">\(Q\)</span> que pase por <span style="font-size: 0.9em;">\(C\)</span> se obtiene <span style="font-size: 0.9em;">\(R\)</span>, tercer vértice del triángulo buscado. De la misma manera, se utiliza una construcción similar para obtener el  <span style="font-size: 0.9em;">\(\triangle PST\)</span>, segundo triángulo buscado (véase la <a href="#3">figura 3</a>).
+	</p>
+	<figure class="fig" id="3">
+	<img src="images/figura3.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> Triángulos inscritos resultantes.
+	</figcaption>
+	</figure>
+	<h3>Observaciones finales</h3>
+	<ol>
+	<li>
+	Obsérvese que de manera general pueden existir dos, una o ninguna solución posible al problema planteado dependiendo de si el eje de la proyectividad establecida es secante, tangente o no corta, respectivamente, a la circunferencia dada.
+	</li>
+	<li>
+	Dado el carácter proyectivo de las cónicas, el problema se podría haber planteado con cualquiera de ellas (elipse, hipérbola o parábola).
+	</li>
+	<li>Cabe comentar que permutando el orden de puntos elegidos, resultan tres ejes de proyectividad distintos que dan lugar a distintos pares de puntos que son los distintos vértices de los triángulos solución resultantes.
+	</ol>
+	
+	<h2>Solución con conjugación</h2> <!--Solución por conjugación!!!!!!!!!!!!! -->
+	<p>
+	El lector puede leer un ensayo extenso sobre la solución por conjugación que vamos a mostrar aquí en <a href="#ref-pedret">Pedret Yebra (2008)</a>.
+	</p>
+	<p>
+	A continuación exponemos la construcción (véase la <a href="#3">figura 4</a>):
+	</p>
+	<ol>
+		<li>Trazamos el <span style="font-size: 0.9em;">\(\triangle A'B'C'\)</span> conjugado del <span style="font-size: 0.9em;">\(\triangle ABC\)</span> respecto de la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> dada. Los lados del triángulo conjugado referido son las polares de <span style="font-size: 0.9em;">\(A\)</span>, <span style="font-size: 0.9em;">\(B\)</span> y  <span style="font-size: 0.9em;">\(C\)</span> respecto la circunferencia.</li>
+		<li>Las rectas <span style="font-size: 0.9em;">\(AA'\)</span>, <span style="font-size: 0.9em;">\(BB'\)</span> y <span style="font-size: 0.9em;">\(CC'\)</span> cortan el triángulo conjugado en los puntos <span style="font-size: 0.9em;">\(D\)</span>, <span style="font-size: 0.9em;">\(E\)</span> y <span style="font-size: 0.9em;">\(F\)</span>, respectivamente.</li>
+		<li>Las rectas <span style="font-size: 0.9em;">\(DE\)</span>, <span style="font-size: 0.9em;">\(EF\)</span> y <span style="font-size: 0.9em;">\(FD\)</span> cortan la circunferencia dada en los puntos <span style="font-size: 0.9em;">\(N\)</span>, <span style="font-size: 0.9em;">\(P\)</span>, <span style="font-size: 0.9em;">\(R\)</span>, <span style="font-size: 0.9em;">\(T\)</span>, <span style="font-size: 0.9em;">\(Q\)</span> y  <span style="font-size: 0.9em;">\(S\)</span>, respectivamente, de manera que los <span style="font-size: 0.9em;">\(\triangle NRQ\)</span> y <span style="font-size: 0.9em;">\(\triangle PTS\)</span> son los triángulos inscritos a la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> buscados.</li>
+	</ol>
+	<figure class="fig" id="4">
+	<img src="images/figura4.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> Solución por conjugación.
+	</figcaption>
+	</figure>
+	<h2>Solución mediante construcción geométrica</h2> <!-- Solución mediante construcción geométrica !!!!!!!!!!! -->
+	<p>
+	La construcción que se va a exponer a continuación aparece en <a href="#ref-carrega">Carréga (1989, pp. 98-101)</a>. Vamos a utilizar para ello una configuración de puntos ligeramente distinta a la propuesta en las dos soluciones anteriores, de manera que los puntos <span style="font-size: 0.9em;">\(A\)</span>, <span style="font-size: 0.9em;">\(B\)</span> y <span style="font-size: 0.9em;">\(C\)</span> serán en este caso exteriores a la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> (véase la <a href="#5">figura 5</a>).
+	</p>
+	<figure class="fig" id="5">
+	<img src="images/figura5.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> 
+	</figcaption>
+	</figure>
+	<p>
+	Sea <span style="font-size: 0.9em;">\(O\)</span> el centro de la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> dada y, supongamos que los puntos <span style="font-size: 0.9em;">\(A\)</span>, <span style="font-size: 0.9em;">\(B\)</span> y <span style="font-size: 0.9em;">\(C\)</span> dados están sobre los lados <span style="font-size: 0.9em;">\(MP\)</span>, <span style="font-size: 0.9em;">\(PN\)</span> y <span style="font-size: 0.9em;">\(NM\)</span> (o sus prolongaciones en el caso propuesto) respectivamente.
+	</p>
+	<ol>
+		<li> Supongamos que la paralela a <span style="font-size: 0.9em;">\(AB\)</span> por el punto <span style="font-size: 0.9em;">\(N\)</span> corta a la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en el punto <span style="font-size: 0.9em;">\(E,\)</span> y que la recta <span style="font-size: 0.9em;">\(EM\)</span> corta a <span style="font-size: 0.9em;">\(AB\)</span> en el punto <span style="font-size: 0.9em;">\(F\)</span>. Veamos que <span style="font-size: 0.9em;">\(F\)</span> está determinado por los datos del problema.</li>
+	</ol>
+	<p>
+	En efecto, <span style="font-size: 0.9em;">\(\measuredangle MPN=\measuredangle MEN\)</span>, ya que ambos son ángulos inscritos en la circunferencia que abarcan el mismo segmento <span style="font-size: 0.9em;">\(MN\)</span> y, <span style="font-size: 0.9em;">\(\measuredangle MEN=\measuredangle MFA\)</span>, ya que son ángulos alternos internos y <span style="font-size: 0.9em;">\(EN\parallel AB\)</span>. En consecuencia los triángulos <span style="font-size: 0.9em;">\(PAB\)</span> y <span style="font-size: 0.9em;">\(FAM\)</span> son semejantes y resulta
+	</p>
+	<div class="equation" style="font-size: 0.9em;">
+	\[
+    AF\cdot AB=AM\cdot AP=P_{F|\mathcal{C}},
+    \]
+	</div>
+	<p>
+	donde con <span style="font-size: 0.9em;">\(P_{F|\mathcal{C}}\)</span> denotamos la potencia de <span style="font-size: 0.9em;">\(F\)</span> respecto de <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>.
+	</p>
+	<p>
+	La <a href="#6">figura 6</a> muestra cómo construir el punto <span style="font-size: 0.9em;">\(F\)</span>. Basta trazar una secante por <span style="font-size: 0.9em;">\(A\)</span> a la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> y construir la circunferencia que pasa por los dos puntos de intersección y también por el punto <span style="font-size: 0.9em;">\(B\)</span> dado. Entonces dicha circunferencia cortará a <span style="font-size: 0.9em;">\(AB\)</span> en <span style="font-size: 0.9em;">\(F\)</span>.
+	</p>
+	<figure class="fig" id="6">
+	<img src="images/figura6.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> 
+	</figcaption>
+	</figure>
+	<ol start="2">
+		<li> Supongamos que la paralela por <span style="font-size: 0.9em;">\(N\)</span> a <span style="font-size: 0.9em;">\(FC\)</span> corta a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en el punto <span style="font-size: 0.9em;">\(G\)</span> y que la recta <span style="font-size: 0.9em;">\(EG\)</span> corta a <span style="font-size: 0.9em;">\(FC\)</span> en el punto <span style="font-size: 0.9em;">\(H\)</span>. Si <span style="font-size: 0.9em;">\(E=G\)</span> se sustituye la recta <span style="font-size: 0.9em;">\(EG\)</span> por la tangente a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> trazada por <span style="font-size: 0.9em;">\(E\)</span>. Como en el apartado anterior, con ayuda de los triángulos semejantes <span style="font-size: 0.9em;">\(EFH\)</span> y <span style="font-size: 0.9em;">\(CFM\)</span>, se demuestra que
+		<div class="equation" style="font-size: 0.9em;">
+		\[
+			FH\cdot FC=P_{F|\mathcal{C}}.
+		\] 
+		</div>
+		</li>
+		<li>Demostremos que la cuerda <span style="font-size: 0.9em;">\(EG\)</span> puede construirse también a partir de los datos del problema, usando <span style="font-size: 0.9em;">\(F\)</span> y <span style="font-size: 0.9em;">\(H\)</span>. La cuerda <span style="font-size: 0.9em;">\(EG\)</span> se ve desde <span style="font-size: 0.9em;">\(N\)</span> bajo el ángulo <span style="font-size: 0.9em;">\(\measuredangle GNE\)</span>, que es uno de los ángulos formados por las rectas <span style="font-size: 0.9em;">\(FB\)</span> y <span style="font-size: 0.9em;">\(FC\)</span>. Sea <span style="font-size: 0.9em;">\(K\)</span> el punto de la semirrecta <span style="font-size: 0.9em;">\(FB\)</span> tal que <span style="font-size: 0.9em;">\(FK\)</span> es igual al radio de <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>.</li>
+	</ol>
+	<p>Entonces la circunferencia de centro <span style="font-size: 0.9em;">\(K\)</span> que pasa por <span style="font-size: 0.9em;">\(F\)</span> corta a <span style="font-size: 0.9em;">\(FB\)</span> y <span style="font-size: 0.9em;">\(FC\)</span> en puntos <span style="font-size: 0.9em;">\(\beta\)</span> y <span style="font-size: 0.9em;">\(\gamma\)</span> tales que la cuerda <span style="font-size: 0.9em;">\(\beta\gamma\)</span> mide lo mismo que <span style="font-size: 0.9em;">\(EG\)</span>. De ello resulta que si <span style="font-size: 0.9em;">\(\delta\)</span> es el punto medio de la cuerda <span style="font-size: 0.9em;">\(\beta\gamma\)</span>, la cuerda <span style="font-size: 0.9em;">\(EG\)</span> es tangente a la circunferencia de centro <span style="font-size: 0.9em;">\(O\)</span> y radio <span style="font-size: 0.9em;">\(K\delta\)</span>. Esto da una construcción de <span style="font-size: 0.9em;">\(EG\)</span> trazando una tangente que pasa por <span style="font-size: 0.9em;">\(H\)</span> a la circunferencia de centro <span style="font-size: 0.9em;">\(O\)</span> con radio <span style="font-size: 0.9em;">\(K\delta\)</span>.</p>
+	<p>En síntesis, la construcción propuesta (véase la <a href="#7">figura 7</a>) se resume de este modo:</p>
+	<ol>
+		<li>Se construye <span style="font-size: 0.9em;">\(F\)</span> sobre <span style="font-size: 0.9em;">\(AB\)</span> tal que <span style="font-size: 0.9em;">\(AF \cdot AB=P_{A|\mathcal{C}}\)</span>.</li>
+		<li>Se construye <span style="font-size: 0.9em;">\(H\)</span> sobre <span style="font-size: 0.9em;">\(FC\)</span> tal que <span style="font-size: 0.9em;">\(FH \cdot FC=P_{F|\mathcal{C}}\)</span>.</li>	
+		<li>Se construye <span style="font-size: 0.9em;">\(K\)</span> sobre la semirrecta <span style="font-size: 0.9em;">\(FB\)</span> tal que <span style="font-size: 0.9em;">\(FK\)</span> es el radio de <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>. A continuación se construye la circunferencia con centro <span style="font-size: 0.9em;">\(K\)</span> que pasa por <span style="font-size: 0.9em;">\(F\)</span>, que cortará <span style="font-size: 0.9em;">\(FB\)</span> en <span style="font-size: 0.9em;">\(\beta\)</span> y a <span style="font-size: 0.9em;">\(FC\)</span> en <span style="font-size: 0.9em;">\(\gamma.\)</span> Llamamos <span style="font-size: 0.9em;">\(\delta\)</span> al punto medio de <span style="font-size: 0.9em;">\(\beta\gamma\)</span>.</li>
+		<li>Se construye la circunferencia con centro <span style="font-size: 0.9em;">\(O\)</span> y radio <span style="font-size: 0.9em;">\(K\delta\)</span>.</li>
+		<li>Se trazan tangentes a esta circunferencia desde <span style="font-size: 0.9em;">\(H\)</span>. Estas tangentes cortan a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en
+	cuatro puntos. Llamamos <span style="font-size: 0.9em;">\(E\)</span> a uno de esos puntos. Es posible que en dicha elección tengamos que hacer varios intentos para elegir el punto <span style="font-size: 0.9em;">\(E\)</span> &laquo;adecuado&raquo; que haga posible la inscripción del triángulo que se busca en <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>.</li>
+		<li>La recta <span style="font-size: 0.9em;">\(EF\)</span> corta a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en <span style="font-size: 0.9em;">\(M\)</span>, la recta <span style="font-size: 0.9em;">\(MC\)</span> corta a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en <span style="font-size: 0.9em;">\(N\)</span> y finalmente la recta <span style="font-size: 0.9em;">\(MA\)</span> corta a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en <span style="font-size: 0.9em;">\(P\)</span>.</li>
+	</ol>
+	<figure class="fig" id="7">
+	<img src="images/figura7.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> 
+	</figcaption>
+	</figure>
+	<h3>Observaciones finales</h3>
+	<ol>
+		<li>Como el punto <span style="font-size: 0.9em;">\(E\)</span> debe elegirse entre cuatro posibles (dos por cada tangente que interseca con <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>), es probable que tengamos que realizar varios intentos hasta dar con el punto <span style="font-size: 0.9em;">\(E\)</span> que resulta adecuado de entre esos cuatro.</li>
+		<li> El método usado aquí es perfectamente válido en el caso particular que los puntos <span style="font-size: 0.9em;">\(A\)</span>, <span style="font-size: 0.9em;">\(B\)</span> y <span style="font-size: 0.9em;">\(C\)</span> estén alineados. En dicho caso, el análisis que se ha realizado refleja que los puntos <span style="font-size: 0.9em;">\(E\)</span> y <span style="font-size: 0.9em;">\(G\)</span> coincidirán, y la recta <span style="font-size: 0.9em;">\(EG\)</span> se sustituye por la tangente a <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> en <span style="font-size: 0.9em;">\(E\)</span>. La síntesis se simplifica en gran medida, ya que la circunferencia con radio <span style="font-size: 0.9em;">\(K\delta\)</span> coincidirá entonces con <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>.</li>
+		<li>El problema se puede generalizar a la construcción de un polígono de <span style="font-size: 0.9em;">\(n\)</span> lados inscrito en una circunferencia dada, pasando los lados de dicho polígono por los <span style="font-size: 0.9em;">\(n\)</span> puntos dados. Además, se puede generalizar también cambiando la circunferencia por una cónica.</li>
+	</ol>
+	<h2>Solución analítica</h2> <!-- Solución analítica. Carnot!!!!!!!!!!----->
+	<p>La solución analítica que vamos a presentar aquí se basa en los trabajos del francés Carnot que, como ya se ha comentado, simplificó el método analítico utilizado por Lagrange unos años antes (véase <a href="ref-carnot">Carnot, 1803</a>). La fundamentación teórica se puede consultar en <a href="ref-wanner">Wanner (2006)</a>.</p>
+	<h3>La transformación de Möbius</h3>
+	<p>La principal herramienta que utilizaremos es la denominada <em>transformación de Möbius</em> <span style="font-size: 0.9em;">\(u\mapsto v\)</span> donde </p>
+	<div class="equation" style="font-size: 0.9em;" id="ec1">
+	\[
+	v=\frac{pu+q}{ru+s}\qquad\text{o}\qquad \begin{pmatrix}v\\1\end{pmatrix}=K  \begin{pmatrix}p&q\\r&s\end{pmatrix}\begin{pmatrix}u\\1\end{pmatrix},\quad K\in\mathbb{R},\tag{1}
+	\]
+	</div>
+	<p>con <span style="font-size: 0.9em;">\(p\)</span>, <span style="font-size: 0.9em;">\(q\)</span>, <span style="font-size: 0.9em;">\(r\)</span>, <span style="font-size: 0.9em;">\(s\)</span> parámetros conocidos. La expresión permite un factor de escala en el producto matricial. </p>
+	<p>Carnot descubrió que la composición de dos de estas transformaciones</p>
+	<div class="equation" style="font-size: 0.9em;" id="ec2">
+	\[
+	u_2=\frac{p_1u_1+q_1}{r_1u_1+s_1}\,,\quad 
+	u_3=\frac{p_2u_2+q_2}{r_1u_2+s_2}=\frac{pu_2+q}{ru_2+s}\,,
+	\tag{2}
+	\]
+	</div>
+	<p>donde</p>
+	<div class="equation" style="font-size: 0.9em;">
+	\[
+	\begin{pmatrix}p&q\\r&s\end{pmatrix}=
+	\begin{pmatrix}p_2&q_2\\r_2&s_2\end{pmatrix}
+	\begin{pmatrix}p_1&q_1\\r_1&s_!\end{pmatrix}
+	\]
+	</div>
+	<p>resulta nuevamente en una transformación de Möbius cuyo nuevo coeficiente matricial se trata del <em>producto</em> de dos matrices de coeficientes. Un resultado análogo resulta verídico para las operaciones <em>inversas</em>, y las transformaciones con  <span style="font-size: 0.9em;">\(ps-qr\neq 0\)</span> forman un grupo. </p>
+	<p>La aplicación definida por la expresión <a href="#ec1">(1)</a> resulta una <em>involución</em>, es decir su propia inversa, si y solo si <span style="font-size: 0.9em;">\(s=-p\)</span>. </p>
+	<h3>Procedimiento</h3>
+	<p>El descubrimiento crucial de Carnot consistió en el hecho de que su método simplificaba enormemente los cálculos a realizar si las tangentes de ciertos semiángulos son utilizadas como coordenadas. Esto nos lleva a las &laquo;coordenadas pitagóricas&raquo; en la circunferencia (que suponemos de radio unidad)<sup><a href="#nota1" id="ref1">1</a></sup> como se muestra en la <a href="#8">figura 8</a>. </p>
+		<div class="equation" style="font-size: 0.9em;" id="ec3">
+	\[
+	u=\tan\left(\frac{\alpha}{2}\right),\qquad x=\frac{1-u^2}{1+u^2}\,,\qquad y=\frac{2u}{1+u^2}\,.
+	\]
+	</div>
+	<p>El punto <span style="font-size: 0.9em;">\((x,y)\)</span> se mueve sobre la circunferencia en sentido horario para <span style="font-size: 0.9em;">\(-\infty < u < \infty \) </span> (y los valores tienen conexión con las ternas pitagóricas <span style="font-size: 0.9em;">\(\{1-u^2,2u,1+u^2\}\)</span>, de ahí el nombre).</p>
+	<figure class="fig" id="8">
+	<img src="images/figura8.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> Coordenadas pitagóricas sobre la circunferencia (izqda.) y</br> la involución de la circunferencia respecto a un punto dado (drcha.).
+	</figcaption>
+	</figure>
+	<p>La idea es la que sigue: se comienza desde un punto <span style="font-size: 0.9em;">\(B_1\)</span> arbitrario de coordenadas <span style="font-size: 0.9em;">\(u_1\)</span> y se calcula su proyección <span style="font-size: 0.9em;">\(B_2\)</span> sobre la circunferencia desde el punto de coordenadas conocidas <span style="font-size: 0.9em;">\(A_1=(a_1,b_1)\)</span>. Entonces se calculan sucesivamente los puntos <span style="font-size: 0.9em;">\(B_3\)</span>, <span style="font-size: 0.9em;">\(B_4\)</span>, <span style="font-size: 0.9em;">\(\ldots\)</span> de manera similar satisfaciendo finalmente que <span style="font-size: 0.9em;">\(B_{n+1}=B_1\)</span>. </p>
+	<p>La colinealidad de <span style="font-size: 0.9em;">\(B_1\)</span>, <span style="font-size: 0.9em;">\(B_2\)</span> y <span style="font-size: 0.9em;">\(A_1\)</span> se caracteriza mediante</p>
+	<div class="equation" style="font-size: 0.9em;">
+	\[
+	\begin{vmatrix}
+		\frac{1-u_1^2}{1+u_1^2}&\frac{2u_1}{1+u_1^2}&1\\
+		\frac{1-u_2^2}{1+u_2^2}&\frac{2u_2}{1+u_2^2}&1\\
+		a_1&b_1&1
+	\end{vmatrix}=0
+	\qquad\text{o}\qquad
+	\begin{vmatrix}
+		1-u_1^2&2u_1&1+u_1^2\\[1mm]
+		1-u_2^2&2u_2&1+u_2^2\\[1mm]
+		a_1&b_1&1
+	\end{vmatrix}=0,
+	\]
+	</div>
+	<p>que cuando se multiplica y se divide por un factor trivial <span style="font-size: 0.9em;">\(u_2-u_1\)</span>, resulta</p>
+	<div class="equation" style="font-size: 0.9em;" id="ec4">
+	\[
+	u_2=\frac{-bu_1+1-a_1}{-(a_1+1)u_1+b_1}\qquad\text{o}\qquad
+	\begin{pmatrix}
+		u_2\\1
+	\end{pmatrix}=K\begin{pmatrix}
+		-b_1&1-a_1\\-a_1-1&b_1
+	\end{pmatrix}\begin{pmatrix}
+		u_1\\1
+	\end{pmatrix},\quad K\in\mathbb{R},
+	\]
+	</div>
+	<p>que es una transformación de Möbius. Repitiendo el proceso para el polígono de <span style="font-size: 0.9em;">\(n\)</span> lados y aplicando la expresión <a href="#ec2">(2)</a>, se observa que multiplicando todas estas matrices, se llega a la condición</p>
+	<div class="equation" style="font-size: 0.9em;" id="ec5">
+	\[
+	u_{n+1}=u_1=\frac{au_1+b}{cu_1+d}\,,
+	\]
+	</div>
+	<p>donde</p>
+	<div class="equation" style="font-size: 0.9em;" >
+	\[
+		\begin{pmatrix}
+			a&b\\c&d
+		\end{pmatrix}=
+		\begin{pmatrix}
+			-b_n&1-a_n\\-a_n-1&b_n
+		\end{pmatrix}\cdots\begin{pmatrix}
+			-b_1&1-a_1\\-a_1-1&b_1
+		\end{pmatrix}.
+	\]
+	</div>
+	<p>Esto representa una ecuación cuadrática en <span style="font-size: 0.9em;">\(u_1\)</span> que normalmente tiene dos posibles soluciones.</p>
+	<h3>Caso práctico</h3>
+	<p>Vamos a ver un ejercicio algo más general al inicialmente propuesto. Consideramos la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> de radio unidad centrada en el origen de coordenadas y los puntos <span style="font-size: 0.9em;">\(A_1=(1{,}5; 1)\)</span>, <span style="font-size: 0.9em;">\(A_2=(-1{,}5; 1{,}5)\)</span>, <span style="font-size: 0.9em;">\(A_3=(-0{,}5; -0{,}5)\)</span> y <span style="font-size: 0.9em;">\(A_4=(-2; -0{,}7)\)</span>. Vamos a construir el cuadrilátero inscrito en <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> cuyos lados pasan por los puntos <span style="font-size: 0.9em;">\(A_i\)</span> dados.</p>
+	<p>En primer lugar vamos a obtener la matriz de la transformación de Möbius:</p>
+	<div class="equation" style="font-size: 0.9em;" >
+	\[
+		\begin{pmatrix}
+		a&b\\c&d
+		\end{pmatrix}=
+		\begin{pmatrix}
+		0{,}7&3\\1&-0{,}7
+		\end{pmatrix}
+		\begin{pmatrix}
+		0{,}5&1{,}5\\-0{,}5&-0{,}5
+		\end{pmatrix}
+		\begin{pmatrix}
+		-1{,}5&2{,}5\\0{,}5&1{,}5
+		\end{pmatrix}
+		\begin{pmatrix}
+		-1&-0{,}5\\-2{,}5&1
+		\end{pmatrix}=\begin{pmatrix}
+		7{,}375&-4{,}3\\-11{,}9&5{,}075
+		\end{pmatrix}.
+	\]
+	</div>
+	<p>Por lo tanto, se tiene que</p>
+	<div class="equation" style="font-size: 0.9em;" >
+	\[
+	u_1=\frac{7{,}375u_1-4{,}3}{-11{,}9u_1+5{,}075}\implies -11{,}9u_1^2-2{,}3u_1+4{,}3=0\implies\begin{cases}u_1\approx-0{,}7055,\\u_1\approx 0{,}5122.\end{cases}
+	\]
+	</div>
+	<p>Para obtener el punto <span style="font-size: 0.9em;">\(B_1\)</span>, primer vértice del cuadrilátero buscado, basta obtener la intersección de la recta que pasa por los puntos <span style="font-size: 0.9em;">\(A=(-1,0)\)</span> y <span style="font-size: 0.9em;">\(B=(0;-0{,}7055)\)</span>, o <span style="font-size: 0.9em;">\(C=(0;0{,}5122)\)</span> con la circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>. El punto <span style="font-size: 0.9em;">\(B_2\)</span> se obtendrá de la intersección de la recta <span style="font-size: 0.9em;">\(A_1B_1\)</span> con <span style="font-size: 0.9em;">\(\mathcal{C}\)</span>. De forma similar, los vértices <span style="font-size: 0.9em;">\(B_i\)</span> del cuadrilátero resultan de la intersección de las rectas <span style="font-size: 0.9em;">\(A_{i-1}B_{i-1}\)</span> con <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> (véase la <a href="#9">figura 9</a>).</p>
+	<figure class="fig" id="9">
+	<img src="images/figura9.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> Dos soluciones posibles al problema propuesto.
+	</figcaption>
+	</figure>
+	<p>Obsérvese en las soluciones obtenidas que no siempre se garantiza que los polígonos resultantes sean convexos.</p>
+	<h3>Implementación del algoritmo en Mathematica<sup>&#169;</sup></h3>
+	<h4>Parametrización de la circunferencia unidad</h4>
+	<p>Suponemos, sin pérdida esencial de generalidad, que la circunferencia dada es la circunferencia unidad. Usamos la conocida parametrización racional de la circunferencia unidad que viene dada por las fórmulas de sustitución de Weierstrass. </p>
+<pre style="margin-left: 2em;margin-top: -2em;"><code>
+f[u_]:=Simplify[{(1-u^2)/(1+u^2),(2u)/(1+u^2)}]
+</code></pre>
+	<p>Definimos una función que expresa que tres puntos están alineados.</p>
+	<h4>Puntos alineados</h4>
+<pre style="margin-left: 2em;margin-top: -2em;"><code>
+EstanAlineados[ptA_, ptB_, ptC_] := Det[{ptB-ptA, ptC-ptA}] == 0
+</code></pre>	
+	<p>Ahora partimos de A1 = (a1, b1) y B1 = f (u). Queremos hallar v tal que f(v) sea la segunda intersección B2 de A1B1 con la circunferencia unidad. </p>
+<pre style="margin-left: 2em;margin-top: -2em;"><code>
+Clear[u]
+Solve[EstanAlineados[{a1, b1}, f[u], f[v]], v]
+</code></pre>
+	<p>Así obtenemos</p> 
+	<div class="equation" style="font-size: 0.9em;" >
+	\[
+	v = \frac{{1 - a_1  - b_1 u}}{{b_1  - (1 + a_1 )u}}\,.
+	\]
+	</div>
+	<h4>Expresión matricial</h4>
+	<p>Este resultado lo podemos expresar en forma matricial</p>
+<pre style="margin-left: 2em;margin-top: -2em;"><code>
+m[{a_, b_}] := {{-b, 1-a}, {-a-1, b}}
+SiguientePaso[u_, ptA_] := Factor[Apply[Divide, m[ptA].{u, 1}]]
+</code></pre>
+	<p>También podemos hacer una definición directa usando la fórmula anterior </p>
+<pre style="margin-left: 2em;margin-top: -2em;"><code>
+SiguientePaso[u_,{a_,b_}]:=Factor[(1-a-b u)/(b-u-a u)]
+</code></pre>
+	<h4>Cálculo de los puntos sucesivos </h4>
+	<p>Ahora, partimos de u1 arbitrario, y a partir de él y de los puntos de partida A1, A2, A3 hallamos u2, u3 y u4 </p>
+<pre style="margin-left: 2em;margin-top: -2em;"><code>
+ptA1 = {3, 1}; 
+ptA2 = {-1/3, 0}; 
+ptA3 = {-1, -3/2};
+ptB1 := f[u1];
+ptB2 := f[u2];
+ptB3 := f[u3];
+u2 = SiguientePaso[u1, ptA1]
+u3 = SiguientePaso[u2, ptA2]
+u4 = SiguientePaso[u3, ptA3]
+</code></pre>
+<p>Obligamos a que sea u4 = u1, que resolverá nuestro problema, resultando en general dos soluciones. </p>	
+<pre style="margin-left: 2em;"><code>
+solu1 = Solve[u4 == u1, u1]
+</code></pre>
+	<h4>Gráficos </h4>
+<pre style="margin-left: 2em; margin-top: -2em;"><code>
+instr = {PointSize[0.02],
+	Directive[{FontFamily → "Palatino Linotype", FontSize → 12, 
+	FontSlant → Italic}],
+	InfiniteLine[{ptA1, ptB1}],
+	InfiniteLine[{ptA2, ptB2}],
+	InfiniteLine[{ptA3, ptB3}],
+	Blue, Circle[{0, 0}, 1], Map[Point, {ptA1, ptA2, ptA3}],
+	Text["A1", ptA1, {0, -1.5}],
+	Text["A2", ptA2, {0, -1.5}],
+	Text["A3", ptA3, {0, 1.5}],
+	Red, Map[Point, {ptB1, ptB2, ptB3}],
+	Text["B1", ptB1, -ptB1],
+	Text["B2", ptB2, -ptB2],
+	Text["B3", ptB3, -ptB3]
+	};
+Grid[{Map[Graphics, instr /. solu1]}]
+</code></pre>
+	<h4>Ejemplo con cuatro puntos</h4>
+<pre style="margin-left: 2em; margin-top: -2em;"><code>
+A = {{3, 1}, {-1/3,0}, {-1,-3/2},{2,-2}};
+u = FoldList[SiguientePaso, u1, A]
+	solu1 = Solve[Last[u] == u1, u1]
+	Linea[a_, b_] := InfiniteLine[{a, b}]
+	instr2 ={PointSize[0.02],Directive[{
+				FontFamily → "Palatino Linotype",
+				FontSize → 12, FontSlant → Italic}],
+	MapThread[Linea, {A, Map[f, Drop[u, -1]]}],
+	Blue, Circle[{0, 0}, 1],
+	Table[Text[Subscript["A", i], A[[i]], -0.7A[[i]], 
+	Background → White], {i, 1, Length[A]}],
+	Red, Table[Text[Subscript["B", i], f[u[[i]]],
+	-0.7f[u[[i]]], Background → White], {i, 1, Length[u]-1}],
+	Map[Point[f[#]] &, Drop[u, -1]],
+	Blue, Map[Point, A]
+	};
+Grid[{Map[Graphics, instr2 /. solu1]}]
+</code></pre>
+<h2>Conclusiones</h2> <!--Conclusiones !!!!!!!!!!-->
+<p>Dado el carácter proyectivo del problema, éste tiene fuertes implicaciones en campos como las geometrías hiperbólicas (véase <a href="#ref-cannon">Cannon, Floyd <em>et al.</em>, 1997</a>). </p>
+	<p>Una transformación de Möbius de una circunferencia <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> es una restricción de una transformación proyectiva que deja  invariante. En otras palabras, una transformación de Möbius es una extensión de una isometría hiperbólica por continuidad hasta el límite del <a href="https://en.wikipedia.org/wiki/Beltrami%E2%80%93Klein_model" target="_blank">modelo de disco de Cayley-Klein</a> (denominado también de Beltrami-Klein).</p> 
+	<p>La acción del grupo de Möbius sobre un círculo (o disco) es equivalente a la acción del grupo fraccionario lineal sobre una recta proyectiva, denotado PSL(2, <span style="font-size: 0.9em;">\(\mathbb{C}\)</span>) (véase <a href="ref-fineros">Fine & Rosenberger, 2019</a>), si el círculo se identifica con la recta por una proyección estereográfica. Esto implica lo siguiente.</p>
+	<p>Las transformaciones de Möbius de un círculo actúan libre y transitivamente sobre ternas de puntos.</p>
+	<p>En particular, una transformación de Möbius no idéntica no puede tener más de dos puntos fijos como ya hemos visto. Una transformación de Möbius <span style="font-size: 0.9em;">\(f\)</span> que preserva la orientación, junto con la correspondiente isometría hiperbólica que preserva la orientación <span style="font-size: 0.9em;">\(f'\)</span> pertenece a uno de los tres tipos siguientes:</p>
+	<ul>
+		<li>elíptica, si <em>f</em> no tiene puntos fijos;</li>
+		<li>parabólica, si <em>f</em> tiene exactamente un punto fijo;</li>
+		<li>hiperbólica, si <em>f</em> tiene exactamente dos puntos fijos.</li>
+	</ul>	
+	<p>Toda isometría hiperbólica de tipo elíptico tiene un punto fijo dentro de <span style="font-size: 0.9em;">\(\mathcal{C}\)</span> y resulta por lo tanto una rotación alrededor de dicho punto. La rotación de 180<sup>o</sup> es la simetría central. </p>
+	<p>La isometría hiperbólica más básica que invierte la orientación es la simetría axial. Las rectas que intersecan en un punto junto a su imagen especular respecto a <span style="font-size: 0.9em;">\(\ell\)</span> pasan todas por el polo de <span style="font-size: 0.9em;">\(\ell\)</span>.</p>
+	<p>El hecho de que una transformación de Möbius con tres puntos fijos sea la identidad implica el siguiente teorema.</p>
+	<p><b>Teorema</b>. <em>Si el problema de Castillon tiene al menos tres soluciones, entonces cada punto de la circunferencia supone una solución independiente.</em>
+	<em>Si <span style="font-size: 0.9em;">\(A_1,\ldots, A_n\)</span> son colineales, entonces para n impar no hay solución, y para n par la existencia de una solución no trivial implica que cada punto de partida implica una solución.</em></p>
+	<p>Para <span style="font-size: 0.9em;">\(n=3\)</span>, el problema tiene a lo sumo dos soluciones como ya hemos visto. Para <span style="font-size: 0.9em;">\(n=4\)</span>, infinitas soluciones son posibles tan solo si <span style="font-size: 0.9em;">\(A_1, A_2, A_3, A_4\)</span> son colineales ya que los ejes, respectivamente centros de las transformaciones de Möbius cuya composición resulta también una nueva transformación (como ya se ha visto anteriormente), deben coincidir. El caso de que coincidan seis puntos en los pares <span style="font-size: 0.9em;">\(A_1 = A_4\)</span>, <span style="font-size: 0.9em;">\(A_2 = A_5\)</span>, <span style="font-size: 0.9em;">\(A_3 = A_6\)</span> está relacionado con el <a href="https://es.wikipedia.org/wiki/Teorema_de_Pascal" target="_blank">teorema de Pascal</a>.</p>
+	<p>La geometría hiperbólica nos permite producir configuraciones de puntos para los cuales la cadena de cuerdas de la circunferencia se cierra independientemente del punto de partida.</p>
+	<p>Resulta interesante que el problema de Castillon puede hacerse extensible a la esfera. La aplicación <span style="font-size: 0.9em;">\(I_p:\mathbb{S}^2\mapsto\mathbb{S}^2\)</span> es una transformación de Möbius. Como dicha transformación preserva la orientación, entonces puede ser determinada por la imagen de tres puntos. Esto nos lleva al siguiente teorema.</p>
+	<p><b>Teorema</b>. <em>Si el problema de Castillon para la esfera y un número par de puntos tiene al menos tres soluciones, entonces cada punto de partida en la esfera da una solución.</em></p>
+	<p>La <a href="#10">figura 10</a> muestra tres configuraciones de puntos (véase <a href="ref-izmestiev">Izmestiev, 2015</a>), para los cuales la secuencia encadenada de cuerdas siempre cierra. Los puntos son los vértices de un dodecaedro hiperbólico en ángulo recto en el modelo Cayley-Klein.</p>
+	<figure class="fig" id="10">
+	<img src="images/figura10.svg" alt="" />
+	<figcaption>
+		<span class="fig-number"></span> Configuraciones de puntos sobre la esfera <span style="font-size: 0.9em;">\(\mathbb{S}^2\)</span>, para las que</br> el problema de Castillon tiene inﬁnidad de soluciones posibles.
+	</figcaption>
+	</figure>
+	<p>Para ver por qué funcionan dichas configuraciones, se representa la reflexión en un vértice como una composición de reflexiones en tres lados adyacentes del dodecaedro. Al cancelar la reflexión común, obtenemos, por ejemplo,  <span style="font-size: 0.9em;">\(I_2\circ I_1=S_b\circ S_a\)</span> en la representación más a la izquierda de la <a href="#10">figura 10</a> por lo que</p>
+	<div class="equation" style="font-size: 0.9em;" >
+	\[
+		I_8\circ\cdots\circ I_1=(S_a\circ S_d)\circ (S_d\circ S_c)\circ (S_c\circ S_b)\circ (S_b\circ S_a)=S_a\circ S_a=\text{id},
+	\]
+	</div>
+	<p>donde <span style="font-size: 0.9em;">\(S_x\)</span> denota la reflexión respecto a la cara <span style="font-size: 0.9em;">\(x\)</span>.</p>
+	<section class="referencias">
+	<h2>Referencias</h2>
+		<ul class="lista-referencias">
+			<li id="ref-cannon">
+			<span style="font-variant: small-caps;">Cannon</span>, James W.; <span style="font-variant: small-caps;">Floyd</span>, William J.; <span style="font-variant: small-caps;">Kenyon</span>, Richard & <span style="font-variant: small-caps;">Parry</span>, Walter R. <a href="https://www.math.ucdavis.edu/~kapovich/RFG/cannon.pdf" target="_blank">&laquo;Hyperbolic Geometry&raquo;</a>. <em>Flavors of Geometry</em>, 31, 1997, pp. 59-115. MSRI Publications.
+			</li>
+			<li id="ref-carnot">
+			<span style="font-variant: small-caps;">Carnot</span> Lazare N.M. (1803). <a href="https://archive.org/download/geometriedeposit00carn/geometriedeposit00carn.pdf" target="_blank"><em>Géométrie de position</em></a>. Paris : J.B.M. Duprat.
+			</li>
+			<li id="ref-carrega">
+			<span style="font-variant: small-caps;">Carréga</span> Jean-Claude (1989). <a href="https://drive.google.com/file/d/0B-WRjV4ZO7WSSDJKaVlfS3NMR1k/view?resourcekey=0-pc8iATXw0bpTHoOkxYqkkw" target="_blank"><em>Théorie des corps. La règle et le compas</em></a>, 9ª ed. Paris: Hermann.
+			</li>		
+			<li id="ref-misc">
+			<span style="font-variant: small-caps;">Díaz Hernando</span>, Juan Ángel (2015). <a href="https://oa.upm.es/57010/1/MISCELANEA_GEOMETRIA_Tomo_%20I.pdf" target="_blank"><em>Miscelánea de Geometría. Tomo I: Proyectividades e Inversión</em></a>. Madrid.
+			</li>
+			<li id="ref-fineros">
+			<span style="font-variant: small-caps;">Fine</span>, Benjamin & <span style="font-variant: small-caps;">Rosenberger</span>, Gerhard. <a href="https://www.advgrouptheory.com/journal/Volumes/7/Fine,%20Rosenberger%20-%20On%20the%20universal%20group%20PSL(2,C).pdf" target="_blank">&laquo;On the Universal Group PSL(2, <span style="font-size: 0.9em;">\(\mathbb{C}\)</span>)&raquo;</a>. <em>Advances in Group Theory and Applications</em>, 7, 2019, pp. 85–142.  DOI: <a href="https://doi.org/10.32037/agta-2019-005">10.32037/agta-2019-005</a>.
+			</li>
+			<li id="ref-izmestiev">
+			<span style="font-variant: small-caps;">Izmestiev</span>, Ivan. &laquo;A Porism for Cyclic Quadrilaterals, Butterﬂy Theorems, and Hyperbolic Geometry&raquo;. <em>The American Mathematical Monthly</em>, 122(5), 2015, pp. 467-475. DOI: <a href="https://doi.org/10.4169/amer.math.monthly.122.5.467">10.4169/amer.math.monthly.122.5.467</a>.
+			</li>
+			<li id="ref-osterner">
+			<span style="font-variant: small-caps;">Ostermann</span>, Alexander & <span style="font-variant: small-caps;">Wanner</span>, Gerhard (2012). <em>Geometry by its History</em>. Berlin: Springer.
+			</li>
+			<li id="ref-pedret">
+			<span style="font-variant: small-caps;">Pedret Yebra</span>, José María (2008). <a href="https://trianguloscabri.github.io/curso20082009/500ElProblemaDeCastillonSuResolucionPorConjugacionPedret.pdf" target="_blank"><em>El problema de Castillon y su resolución por conjugación</em></a>. Esplugues de Llobregat (Barcelona).
+			</li>
+			<li id="ref-wanner">
+			<span style="font-variant: small-caps;">Wanner</span> Gerhard. <a href="https://ems.press/content/serial-article-files/45288" target="_blank">&laquo;The Cramer-Castillon problem and Urquhart's 'most elementary' theorem&raquo;</a>, <em>Elemente der Mathematik</em>, 61, 2006, pp. 58-64.
+			</li>
+	</ul>
+	</section>
+	<div class="footnotes">
+	<h3>Notas</h3>
+	<ol>
+      <li id="nota1">El concepto formal al que refieren dichas coordenadas también es conocido como <em>parametrización racional de la circunferencia</em> o <em>fórmulas de sustitución de Weierstrass</em>. <a href="#ref1">↩</a></li>
+    </ol>
+	</div>
+	<h2>Sobre los autores</h2>
+	<div style="margin-bottom: 2em;">
+	<figure style="float: left; margin: 0 1.5em 1em 0; width: 200px;">
+	<img src="images/fjgc.png" alt="Francisco Javier García Capitán" style="width: 100%;">
+	</figure>
+	<p><b>Francisco Javier García Capitán</b> (Madrid, mar. 1963). Licenciado en Matemáticas por la Universidad de Granada. Toda una vida profesional (más de 36 años) dedicada a la docencia, ahora jubilado pero dedicado a las matemáticas y al senderismo. Mantiene un gran interés en la investigación de problemas matemáticos elementales, sobre todo de Geometría; ha publicado varios artículos sobre este tema en diversas revistas como <a href="https://zbmath.org/serials/?q=Forum+Geometricorum" target="_blank"><em>Forum Geometricorum</em></a>, <em>Revista Escolar de la Olimpiada Iberoamericana de Matemáticas</em> y el <a href="https://trianguloscabri.github.io/curso20022003/index.htm" target="_blank"><em>Laboratorio Virtual de Triángulos con Cabri</em></a>. Es miembro del comité editorial de la revista <a href="https://lva2.es" target="_blank"><em>Lva</em><sup>2</sup></a> en España y también de otras de carácter más internacional como <a href="https://www.mathproblems-ks.org/" target= "_blank"><em>Mathproblems</em></a>, <a href="https://ijgeometry.com/" target= "_blank"><em>International Journal of Geometry</em></a>, <a href="https://sites.google.com/view/ijcdm/home" target="_blank"><em>International Journal of Computer Discovered Mathematics</em></a> y <a href="https://sangaku-journal.com/index.htm" target= "_blank"><em>Sangaku Journal of Mathematics</em></a>. </p>
+	</div>
+	<div style="margin-bottom: 2em;">
+	<figure style="float: left; margin: 0 1.5em 1em 0; width: 200px;">
+	<img src="images/jmsm.png" alt="José Manuel Sánchez Muñoz" style="width: 100%;">
+	</figure>
+	<p><b>José Manuel Sánchez Muñoz</b> (Madrid, nov. 1973). Ingeniero de Caminos, Canales y Puertos por la Universidad Politécnica de Madrid (UPM). Profesor de Educación Secundaria. Participa activamente en redes sociales como divulgador. Creador de comunidades como <a href="https://t.me/Retos_Matematicos" target="_blank">&laquo;Retos Matemáticos&raquo;</a> o <a href="https://t.me/joinchat/QSqpRR2cS4dVgJD8r16Urg" target="_blank">&laquo;MaTeX&raquo;</a> en Telegram. Además de haber publicado una cantidad notable de artículos y libros, posee experiencia en el mundo editorial. Fue miembro fundador de la revista <a href="https://revista.giepm.com/" target="_blank"><em>Pensamiento Matemático</em></a>. Actualmente dirige la revista de divulgación matemática <a href="https://lva2.es" target="_blank"><em>Lva</em><sup>2</sup></a>. Se reconoce un enamorado de las matemáticas y su historia. Sus investigaciones se centran en campos como la criptografía, teoría de juegos, geometrías riemannianas o innovación educativa. </p>
+	</div>
+  </main>
+</body>
+</html>
+
