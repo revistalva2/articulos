@@ -145,7 +145,7 @@ sup {
     /* Mover la numeración a la izquierda */
     .katex-display .tag {
       position: absolute;    /* Sacamos el número del flujo normal */
-      left: 0em;          /* Ajustamos la posición a la izquierda */
+      left: -2.5em;          /* Ajustamos la posición a la izquierda */
       text-align: left;      /* Alineación opcional */
-	  gap:1em;
+	  margin-left: 2.5em;
     }
