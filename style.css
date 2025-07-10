@@ -137,15 +137,4 @@ sup {
     margin-bottom: 0.5em;
   }
 
- /* Hacer que el contenedor permita posicionamiento relativo */
-    .katex-display {
-      position: relative;
-    }
 
-    /* Mover la numeración a la izquierda */
-    .katex-display .tag {
-      position: absolute;    /* Sacamos el número del flujo normal */
-      left: -2.5em;          /* Ajustamos la posición a la izquierda */
-      text-align: left;      /* Alineación opcional */
-	  margin-left: 2.5em;
-    }
