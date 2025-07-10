@@ -147,4 +147,5 @@ sup {
       position: absolute;    /* Sacamos el número del flujo normal */
       left: 0em;          /* Ajustamos la posición a la izquierda */
       text-align: left;      /* Alineación opcional */
+      margin-right: 1em;    /* margen entre número y fórmula */
     }
