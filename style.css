@@ -137,15 +137,15 @@ sup {
     margin-bottom: 0.5em;
   }
 
- /* Ajustes para pantallas pequeñas */
-@media (max-width: 600px) {
-  .katex-display {
-    display: block;          /* Asegura que la ecuación ocupa todo el ancho */
-    position: relative;      /* Permite posicionar la etiqueta dentro */
-  }
-  .katex-tag {
-    display: block;          /* Mueve la etiqueta a su propia línea */
-    text-align: right;       /* Opcional: alinea a la derecha */
-    margin-top: 0.5em;       /* Espacio superior */
-  }
-}
+ /* Hacer que el contenedor permita posicionamiento relativo */
+    .katex-display {
+      position: relative;
+    }
+
+    /* Mover la numeración a la izquierda */
+    .katex-display .tag {
+      position: absolute;    /* Sacamos el número del flujo normal */
+      left: 0em;          /* Ajustamos la posición a la izquierda */
+      text-align: left;      /* Alineación opcional */
+	  gap:1em;
+    }
